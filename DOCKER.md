@@ -44,7 +44,7 @@ docker-compose --profile production up --build -d
 
 ## Ports
 
-- **8000** - Direct application access (development)
+- **8001** - Direct application access (development)
 - **80** - Nginx reverse proxy (production)
 
 ## Environment Variables

@@ -7,7 +7,7 @@ echo "Starting ApplicationStart phase..."
 cd /var/www/laravel-api
 
 # Start the application with docker-compose
-docker-compose up -d
+docker-compose --profile production up -d
 
 # Wait for container to be ready
 sleep 10
