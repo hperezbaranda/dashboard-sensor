@@ -8,3 +8,36 @@ wheels/
 
 # Virtual environments
 .venv
+/node_modules
+/public/hot
+/vendor
+.env*
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+composer.lock
+queries_to_remember.sql
+config/firebase/firebase.json
+.phpcs
+phpinsights.php
+ide_helper.php
+output*.txt
+
+# exclude everything in vendor views, except our email template
+resources/views/vendor/*
+!resources/views/vendor/notifications/
+resources/views/vendor/notifications/*
+!resources/views/vendor/notifications/email.blade.php
+
+_ide_helper.php
+_ide_helper_models.php
+.DS_Store
+*.un~
+dump.rdb
+storage/jobs/queue.log
+composer.phar
+config/firebase
+
+.vscode/mcp.json
