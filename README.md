@@ -214,3 +214,6 @@ For questions or issues:
 ---
 
 **Built with ❤️ using FastAPI, HTMX, and modern web technologies**
+
+## Docker
+This application is also able to run in docker containers. Please see the [DOCKER](DOCKER.md) file for details.
