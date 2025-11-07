@@ -1,0 +1,12 @@
+services:
+  dashboard-sensor:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    environment:
+      - DEBUG=1
+      - RELOAD=1
+    command: [ "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001", "--reload" ]
