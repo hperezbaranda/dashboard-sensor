@@ -20,8 +20,8 @@ fi
 
 # Set proper permissions
 chown -R www-data:www-data /var/www/laravel-api
-chmod -R 755 /var/www/laravel-api/storage
-chmod -R 755 /var/www/laravel-api/bootstrap/cache
+# chmod -R 755 /var/www/laravel-api/bootstrap/cache
+# chmod -R 755 /var/www/laravel-api/storage
 
 # Build Docker image
 docker-compose build
