@@ -217,3 +217,6 @@ For questions or issues:
 
 ## Docker
 This application is also able to run in docker containers. Please see the [DOCKER](DOCKER.md) file for details.
+
+## Deploying
+Using Fargate
