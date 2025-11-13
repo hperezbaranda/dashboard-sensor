@@ -44,6 +44,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: dashboard-service
+          service: dashboard-service-auto
           cluster: my_dashboard_cluster
           wait-for-service-stability: true
