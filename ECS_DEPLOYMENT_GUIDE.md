@@ -6,8 +6,8 @@ Before deploying, ensure you have:
 
 ### 1. AWS Resources Created
 - ✅ **ECR Repository**: `dashboard`
-- ✅ **ECS Cluster**: `my_dashboard_cluster`
-- ✅ **ECS Service**: `dashboard-service`
+- ✅ **ECS Cluster**: `dashboard-cluster`
+- ✅ **ECS Service**: `dashboard-service-auto`
 - ✅ **CloudWatch Log Group**: `/ecs/dashboard-sensor`
 - ✅ **IAM Role**: `ecsTaskExecutionRole`
 
@@ -32,7 +32,7 @@ bash scripts/create-cloudwatch-logs.sh
 ### 3. Create ECS Cluster
 ```bash
 aws ecs create-cluster \
-    --cluster-name my_dashboard_cluster \
+    --cluster-name dashboard-cluster \
     --region ca-central-1
 ```
 
@@ -41,8 +41,8 @@ First, you need to create the service. You can do this via AWS Console or CLI:
 
 ```bash
 aws ecs create-service \
-    --cluster my_dashboard_cluster \
-    --service-name dashboard-service \
+    --cluster dashboard-cluster \
+    --service-name dashboard-service-auto \
     --task-definition dashboard-task-def \
     --desired-count 1 \
     --launch-type FARGATE \
@@ -87,8 +87,8 @@ docker push 570028955216.dkr.ecr.ca-central-1.amazonaws.com/dashboard:latest
 
 # 2. Update ECS service
 aws ecs update-service \
-    --cluster my_dashboard_cluster \
-    --service dashboard-service \
+    --cluster dashboard-cluster \
+    --service dashboard-service-auto \
     --force-new-deployment \
     --region ca-central-1
 ```
@@ -108,8 +108,8 @@ Push to the `develop` branch to trigger automatic deployment.
 ```bash
 # Check service events
 aws ecs describe-services \
-    --cluster my_dashboard_cluster \
-    --services dashboard-service \
+    --cluster dashboard-cluster \
+    --services dashboard-service-auto \
     --region ca-central-1
 
 # Check task logs
@@ -132,16 +132,16 @@ aws logs get-log-events \
 ### Verification Commands
 ```bash
 # Check cluster status
-aws ecs describe-clusters --clusters my_dashboard_cluster --region ca-central-1
+aws ecs describe-clusters --clusters dashboard-cluster --region ca-central-1
 
 # Check service status
-aws ecs describe-services --cluster my_dashboard_cluster --services dashboard-service --region ca-central-1
+aws ecs describe-services --cluster dashboard-cluster --services dashboard-service-auto --region ca-central-1
 
 # Check running tasks
-aws ecs list-tasks --cluster my_dashboard_cluster --service-name dashboard-service --region ca-central-1
+aws ecs list-tasks --cluster dashboard-cluster --service-name dashboard-service-auto --region ca-central-1
 
 # Get task details
-aws ecs describe-tasks --cluster my_dashboard_cluster --tasks TASK-ARN --region ca-central-1
+aws ecs describe-tasks --cluster dashboard-cluster --tasks TASK-ARN --region ca-central-1
 ```
 
 ## Access Your Application
