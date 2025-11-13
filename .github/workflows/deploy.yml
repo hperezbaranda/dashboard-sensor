@@ -45,5 +45,5 @@ jobs:
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: dashboard-service-auto
-          cluster: my_dashboard_cluster
+          cluster: dashboard-cluster
           wait-for-service-stability: true
