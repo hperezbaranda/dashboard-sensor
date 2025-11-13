@@ -1,55 +1,90 @@
 {
-    "family": "dashboard-task-def",
-    "executionRoleArn": "arn:aws:iam::570028955216:role/ecsTaskExecutionRole",
-    "networkMode": "awsvpc",
-    "requiresCompatibilities": [
-        "FARGATE"
+    "compatibilities": [
+        "EC2",
+        "FARGATE",
+        "MANAGED_INSTANCES"
     ],
-    "cpu": "512",
-    "memory": "1024",
     "containerDefinitions": [
         {
-            "name": "dashboard-container",
-            "image": "570028955216.dkr.ecr.ca-central-1.amazonaws.com/dashboard:latest",
+            "cpu": 0,
+            "environment": [],
+            "environmentFiles": [],
             "essential": true,
-            "portMappings": [
-                {
-                    "containerPort": 8001,
-                    "protocol": "tcp"
-                }
-            ],
-            "environment": [
-                {
-                    "name": "PYTHONUNBUFFERED",
-                    "value": "1"
-                },
-                {
-                    "name": "ENV",
-                    "value": "production"
-                }
-            ],
-            "healthCheck": {
-                "command": [
-                    "CMD-SHELL",
-                    "curl -f http://localhost:8000/ || exit 1"
-                ],
-                "interval": 30,
-                "timeout": 5,
-                "retries": 3,
-                "startPeriod": 60
-            },
+            "image": "",
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/dashboard-sensor",
+                    "awslogs-group": "/ecs/dashboard-task-def",
+                    "awslogs-create-group": "true",
                     "awslogs-region": "ca-central-1",
                     "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "mountPoints": [],
+            "name": "dashboard-container",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 8001,
+                    "hostPort": 8001,
+                    "name": "dashboard-container-8001-tcp",
+                    "protocol": "tcp"
                 }
-            }
+            ],
+            "systemControls": [],
+            "ulimits": [],
+            "volumesFrom": []
         }
     ],
+    "cpu": "256",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::570028955216:role/ecsTaskExecutionRole",
+    "family": "dashboard-task-def",
+    "memory": "512",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2025-11-13T16:45:25.550Z",
+    "registeredBy": "arn:aws:iam::570028955216:root",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "revision": 7,
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
-    }
+    },
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:ca-central-1:570028955216:task-definition/dashboard-task-def:7",
+    "volumes": [],
+    "tags": []
 }
