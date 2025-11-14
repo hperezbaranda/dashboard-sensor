@@ -1,5 +1,8 @@
 # Real-time Environmental Dashboard
 
+[![Tests](https://github.com/hperezbaranda/dashboard-sensor/actions/workflows/test.yml/badge.svg)](https://github.com/hperezbaranda/dashboard-sensor/actions/workflows/test.yml)
+[![Deploy to ECS](https://github.com/hperezbaranda/dashboard-sensor/actions/workflows/deploy.yml/badge.svg)](https://github.com/hperezbaranda/dashboard-sensor/actions/workflows/deploy.yml)
+
 > A modern, responsive web dashboard for monitoring environmental sensor data in real-time using FastAPI, HTMX, and Server-Sent Events (SSE).
 
 ![Dashboard Preview](Real-time-Dashboard.gif)
@@ -172,6 +175,44 @@ uv run uvicorn app:app --host 0.0.0.0 --port 8000
 - CORS headers can be configured for production
 - Environment-based configuration
 - Graceful error handling for client disconnections
+
+## 🧪 Testing
+
+### Running Tests
+
+The project includes a comprehensive test suite using pytest:
+
+```bash
+# Run all tests
+pytest
+
+# Run with verbose output
+pytest -v
+
+# Run with coverage report
+pytest --cov=. --cov-report=term-missing
+
+# Run specific test file
+pytest test_app.py
+
+# Run specific test function
+pytest test_app.py::test_current_reading
+```
+
+### Test Structure
+
+- `test_app.py` - Tests for FastAPI endpoints and application logic
+- `test_utils.py` - Tests for utility functions and sensor data generation
+
+### Continuous Integration
+
+Tests automatically run on every push and pull request via GitHub Actions. The workflow:
+- ✅ Runs on all branches
+- ✅ Tests with Python 3.12
+- ✅ Generates coverage reports
+- ✅ Uploads to Codecov (optional)
+
+See `.github/workflows/test.yml` for the full CI configuration.
 
 ## 🐛 Troubleshooting
 
