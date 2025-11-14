@@ -1,9 +1,8 @@
 name: Deploy to ECS Fargate
 
 on:
-  push:
-    branches:
-      - develop # or your default branch
+  release:
+    types: [created]
 
 jobs:
   deploy:
