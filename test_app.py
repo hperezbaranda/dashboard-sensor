@@ -32,8 +32,8 @@ def test_current_reading():
     assert data["status"] in ["normal", "warning", "critical"," offline"]
 
 
-# def test_stream_endpoint():
-#     """Test that the stream endpoint is accessible"""
-#     response = client.get("/stream")
-#     assert response.status_code == 200
-#     assert "text/event-stream" in response.headers["content-type"]
+def test_stream_endpoint():
+    """Test that the stream endpoint is accessible"""
+    response = client.get("/stream")
+    assert response.status_code == 200
+    assert "text/event-stream" in response.headers["content-type"]
