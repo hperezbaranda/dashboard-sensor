@@ -32,29 +32,25 @@ jobs:
             echo "python_changed=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Exit if no Python files changed
-        if: steps.check-python.outputs.python_changed == 'false'
-        run: |
-          echo "No Python files changed. Skipping tests."
-          exit 0
-
       - name: Set up Python
+        if: steps.check-python.outputs.python_changed == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: 'pip'
 
       - name: Install dependencies
+        if: steps.check-python.outputs.python_changed == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest pytest-cov pytest-asyncio httpx
 
       - name: Run tests
+        if: steps.check-python.outputs.python_changed == 'true'
         run: |
           CHANGED_FILES="${{ steps.changed-files.outputs.modified_files }}"
           pytest $CHANGED_FILES
-         
 
       # - name: Upload coverage reports
       #   uses: codecov/codecov-action@v4
