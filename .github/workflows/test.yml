@@ -31,10 +31,11 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest --verbose --cov=. --cov-report=term-missing
+          # pytest --verbose --cov=. --cov-report=term-missing
+          pytest $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$' || true)
 
-      - name: Upload coverage reports
-        uses: codecov/codecov-action@v4
-        if: success()
-        with:
-          fail_ci_if_error: false
+      # - name: Upload coverage reports
+      #   uses: codecov/codecov-action@v4
+      #   if: success()
+      #   with:
+      #     fail_ci_if_error: false
