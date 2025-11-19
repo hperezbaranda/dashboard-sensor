@@ -45,8 +45,10 @@ jobs:
           pip install pytest pytest-cov pytest-asyncio httpx
 
       - name: Run tests
-        run:
-          pytest $(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.py$')
+        run: |
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '\.py$' || true)
+          pytest $CHANGED_FILES
+         
 
       # - name: Upload coverage reports
       #   uses: codecov/codecov-action@v4
