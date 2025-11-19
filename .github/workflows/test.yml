@@ -46,7 +46,8 @@ jobs:
 
       - name: Run tests
         run: |
-          CHANGED_FILES=$(git diff --name-only origin/HEAD HEAD | grep '\.py$' || git ls-files '*.py')
+          BASE_BRANCH=$(git rev-parse HEAD~1)
+          CHANGED_FILES=$(git diff --name-only $BASE_BRANCH HEAD | grep '\.py$' || git ls-files '*.py')
           pytest $CHANGED_FILES
          
 
