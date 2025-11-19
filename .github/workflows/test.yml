@@ -30,8 +30,7 @@ jobs:
           pip install pytest pytest-cov pytest-asyncio httpx
 
       - name: Run tests
-        run: |
-          # pytest --verbose --cov=. --cov-report=term-missing
+        run:
           pytest $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$' || true)
 
       # - name: Upload coverage reports
