@@ -47,7 +47,10 @@ jobs:
       - name: Run tests
         run: |
           BASE_BRANCH=$(git rev-parse HEAD~1)
-          CHANGED_FILES=$(git diff --name-only $BASE_BRANCH HEAD | grep '\.py$' || git ls-files '*.py')
+            CHANGED_FILES="${{ needs.filter_changes.outputs.python_files }}"
+            if [ -z "$CHANGED_FILES" ]; then
+            CHANGED_FILES=$(git ls-files '*.py')
+            fi
           pytest $CHANGED_FILES
          
 
