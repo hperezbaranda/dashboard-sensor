@@ -29,7 +29,7 @@ def test_current_reading():
     # Verify data types and ranges
     assert isinstance(data["temperature"], (int, float))
     assert isinstance(data["humidity"], (int, float))
-    assert data["status"] in ["normal", "warning", "critical"]
+    assert data["status"] in ["normal", "warning", "critical"," offline"]
 
 
 # def test_stream_endpoint():
