@@ -10,22 +10,7 @@ on:
   #       - main
 
 jobs:
-  filter_changes:
-        runs-on: ubuntu-latest
-        outputs:
-          python_files_changed: ${{ steps.filter.outputs.python }}
-        steps:
-          - uses: actions/checkout@v4
-          - name: Check for Python file changes
-            id: filter
-            uses: dorny/paths-filter@v3
-            with:
-              filters: |
-                python:
-                  - '**.py'
   test:
-    needs: filter_changes
-    if: needs.filter_changes.outputs.python_files_changed == 'true'
     runs-on: ubuntu-latest
     
     steps:
