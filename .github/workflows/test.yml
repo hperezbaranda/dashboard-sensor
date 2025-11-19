@@ -31,7 +31,7 @@ jobs:
 
       - name: Run tests
         run:
-          pytest $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$' || true)
+          pytest $(git diff --name-only origin/${{ github.base_ref }} HEAD | grep '\.py$')
 
       # - name: Upload coverage reports
       #   uses: codecov/codecov-action@v4
