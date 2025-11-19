@@ -41,7 +41,7 @@ def test_generate_reading_multiple():
     readings = [sensor.generate_reading() for _ in range(10)]
     
     # All readings should be valid
-    assert len(readings) == 10
+    assert len(readings) == 11
     
     # Check that readings have variation (not all the same)
     temperatures = [r["temperature"] for r in readings]
