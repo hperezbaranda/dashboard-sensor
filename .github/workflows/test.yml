@@ -52,10 +52,7 @@ jobs:
 
       - name: Run tests
         run: |
-          CHANGED_FILES="${{ needs.filter_changes.outputs.python_files }}"
-          if [ -z "$CHANGED_FILES" ]; then
-          CHANGED_FILES=$(git ls-files '*.py')
-          fi
+          CHANGED_FILES="${{ steps.changed-files.outputs.modified_files }}"
           pytest $CHANGED_FILES
          
 
