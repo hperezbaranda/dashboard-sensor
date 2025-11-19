@@ -10,27 +10,33 @@ on:
   #       - main
 
 jobs:
-  filter_changes:
-        runs-on: ubuntu-latest
-        outputs:
-          python_files_changed: ${{ steps.filter.outputs.python }}
-        steps:
-          - uses: actions/checkout@v4
-          - name: Check for Python file changes
-            id: filter
-            uses: dorny/paths-filter@v3
-            with:
-              filters: |
-                python:
-                  - '**.py'
   test:
-    needs: filter_changes
-    if: needs.filter_changes.outputs.python_files_changed == 'true'
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v40
+
+      - name: Check for Python files
+        id: check-python
+        run: |
+          if echo "${{ steps.changed-files.outputs.all_changed_files }}" | grep -q '\.py$'; then
+            echo "python_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "python_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Exit if no Python files changed
+        if: steps.check-python.outputs.python_changed == 'false'
+        run: |
+          echo "No Python files changed. Skipping tests."
+          exit 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
